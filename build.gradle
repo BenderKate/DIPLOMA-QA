@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id "io.freefair.lombok" version "5.3.3.3"
+    id 'io.qameta.allure' version '2.8.1'
+}
+
+group 'ru.netology'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
+
+allure {
+    autoconfigure = true
+    version = '2.13.3'
+    useJUnit5 {
+        version = '2.13.3'
+    }
+}
+
+configurations {
+    testCompile
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.1'
+    testImplementation 'com.codeborne:selenide:5.19.0'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'io.qameta.allure:allure-selenide:2.13.6'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.1'
+    implementation group: 'commons-dbutils', name: 'commons-dbutils', version: '1.7'
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty 'selenide.headless', System.getProperty('selenide.headless')
+    systemProperty 'db.url', System.getProperty('db.url')
+    systemProperty 'db.user', System.getProperty('db.user', "app")
+    systemProperty 'db.password', System.getProperty('db.password', "pass")
+    systemProperty 'sut.url', System.getProperty('sut.url', "http://localhost:8080/")
+
+}
