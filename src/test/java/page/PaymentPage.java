@@ -1,10 +1,13 @@
 package page;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import data.DataHelper.CardInfo;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class PaymentPage {
@@ -22,7 +25,7 @@ public class PaymentPage {
     private SelenideElement ownerError = $(byText("Владелец")).parent().$(".input__sub");
     private SelenideElement cvcError = $(byText("CVC/CVV")).parent().$(".input__sub");
 
-    public void fillFormWithAllValid (CardInfo cardInfo){
+    public void fillForm (CardInfo cardInfo){
         cardNumber.setValue(cardInfo.getCardNumber());
         month.setValue(cardInfo.getMonth());
         year.setValue(cardInfo.getYear());
@@ -64,5 +67,12 @@ public class PaymentPage {
         cvcError.shouldBe(visible);
     }
 
+    public void successfullPayment() {
+        $(".notification_status_ok").shouldBe(Condition.visible, Duration.ofSeconds(20));
+    }
+
+    public void declinedPayment() {
+        $(byCssSelector("div.notification.notification_status_error.notification_has-closer.notification_stick-to_right.notification_theme_alfa-on-white")).shouldBe(Condition.visible, Duration.ofSeconds(20));
+    }
 
 }
