@@ -19,7 +19,7 @@ public class DataHelper {
         private String cardCVC;
     }
 
-    //    Заполнение для поля Номер карты
+    //    Заполнение поля Номер карты
     public static String getApprovedCardNumber() {
         return ("1111 2222 3333 4444");
     }
