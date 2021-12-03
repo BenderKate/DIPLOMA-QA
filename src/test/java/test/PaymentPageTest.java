@@ -1,6 +1,5 @@
 package test;
 import com.codeborne.selenide.logevents.SelenideLogger;
-import com.github.javafaker.Faker;
 import data.DataHelper;
 import io.qameta.allure.selenide.AllureSelenide;
 import lombok.val;
@@ -8,22 +7,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import page.MainPage;
 import page.PaymentPage;
-
-import java.time.Duration;
-import java.util.Locale;
-
-import static com.codeborne.selenide.Condition.exactText;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selectors.withText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 import static data.DataHelper.CardInfo.*;
-import static page.CreditPage.*;
-import static page.PaymentPage.*;
+
 
 
 public class PaymentPageTest {
@@ -201,7 +189,7 @@ public class PaymentPageTest {
         mainPage.payByCard();
         val paymentPage = new PaymentPage();
         paymentPage.fillForm(cardInfo);
-        paymentPage.yearErrorVisible();
+        paymentPage.expiredCardErrorVisible();
     }
 
 // Passed
@@ -270,7 +258,7 @@ public class PaymentPageTest {
         paymentPage.ownerErrorVisible();
     }
 
-
+// Not Passed TODO Issue
     @Test
     void shouldNotPayWithNameWithDigits() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameWithDigits(), getCVC());
@@ -281,7 +269,7 @@ public class PaymentPageTest {
         paymentPage.ownerErrorVisible();
     }
 
-
+// Not passed TODO Issue
     @Test
     void shouldNotPayWithNameWithSigns() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameWithSigns(), getCVC());
@@ -292,7 +280,7 @@ public class PaymentPageTest {
         paymentPage.ownerErrorVisible();
     }
 
-
+// Not passed TODO Issue
     @Test
     void shouldNotPayWithShortName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameShort(), getCVC());
@@ -303,7 +291,7 @@ public class PaymentPageTest {
         paymentPage.ownerErrorVisible();
     }
 
-
+// Not passed TODO Issue
     @Test
     void shouldNotPayWithLongName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameLong(), getCVC());
@@ -314,7 +302,7 @@ public class PaymentPageTest {
         paymentPage.ownerErrorVisible();
     }
 
-
+// Passed
     @Test
     void shouldPayWithDoubleName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameWithDoubleName(), getCVC());
@@ -325,7 +313,7 @@ public class PaymentPageTest {
         paymentPage.successfullPayment();
     }
 
-
+// Passed
     @Test
     void shouldNotPayWithoutName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), null, getCVC());
@@ -336,7 +324,7 @@ public class PaymentPageTest {
         paymentPage.ownerErrorVisible();
     }
 
-
+// Passed
     @Test
     void shouldNotPayWithCVCwithLetters() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVCwithLetters());
@@ -347,6 +335,7 @@ public class PaymentPageTest {
         paymentPage.cvcErrorVisible();
     }
 
+//    Passed
     @Test
     void shouldNotPayWithCVCwithSigns() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVCwithSigns());
@@ -357,6 +346,7 @@ public class PaymentPageTest {
         paymentPage.cvcErrorVisible();
     }
 
+//    Passed
     @Test
     void shouldNotPayWithCVCwithOneDigit() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVCshort());
@@ -367,6 +357,7 @@ public class PaymentPageTest {
         paymentPage.cvcErrorVisible();
     }
 
+//    Passed
     @Test
     void shouldNotPayWithoutCVC() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), null);
@@ -377,9 +368,11 @@ public class PaymentPageTest {
         paymentPage.cvcErrorVisible();
     }
 
+//    Passed
     @Test
     void shouldNotPayWithoutData(){
         val mainPage = new MainPage();
+        mainPage.payByCard();
         val paymentPage = new PaymentPage();
         paymentPage.notFilledForm();
     }
