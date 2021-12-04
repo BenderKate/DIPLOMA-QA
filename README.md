@@ -21,4 +21,8 @@
 4. Ввести в терминале команду "java -jar artifacts/aqa-shop.jar"
 5. Открыть в браузере адрес "localhost:8080"
 
+### Запуск тестов и отчетов Allure
+1. В терминале ввести команду ./gradlew clean test
+2. В терминале ввести команду ./gradlew allureReport
+
 

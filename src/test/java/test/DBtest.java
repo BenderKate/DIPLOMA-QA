@@ -57,9 +57,4 @@ public class DBtest {
         assertEquals("DECLINED", DBUtils.getPaymentStatus());
     }
 
-
-
-
-
-
 }

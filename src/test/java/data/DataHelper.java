@@ -67,6 +67,10 @@ public class DataHelper {
             return ("1");
         }
 
+        public static String getMonthWithNulls() {
+            return ("00");
+        }
+
         //    Заполнение поля Год
         public static String getValidYear() {
             return String.format("%ty", Year.now());

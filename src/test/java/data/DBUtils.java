@@ -3,11 +3,8 @@ package data;
 import lombok.val;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import static java.sql.DriverManager.*;
-
 
 public class DBUtils {
     private static String url= System.getProperty("db.url");
@@ -17,14 +14,11 @@ public class DBUtils {
     public static void cleanTable() {
         val deletePaymentEntity = "DELETE FROM payment_entity";
         val runner = new QueryRunner();
-        try (val conn = DriverManager.getConnection(
-                url, user, password)
-        ) {
+        try (val conn = DriverManager.getConnection(url, user, password)) {
             runner.update(conn, deletePaymentEntity);
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
     }
 
     public static String getPaymentStatus() throws SQLException {
@@ -34,10 +28,7 @@ public class DBUtils {
 
     private static String getStatus(String query) throws SQLException {
         val runner = new QueryRunner();
-        try
-                (val conn = DriverManager.getConnection(
-                        url, user, password)
-                ) {
+        try (val conn = DriverManager.getConnection(url, user, password)) {
             String status = runner.query(conn, query, new ScalarHandler<String>());
             return status;
         }
