@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import page.MainPage;
 import page.PaymentPage;
+import page.PaymentPage.*;
 
 import static com.codeborne.selenide.Selenide.open;
 import static data.DataHelper.CardInfo.*;
@@ -53,8 +54,7 @@ public class PaymentPageTest {
     void shouldPayByCardSuccessfully() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.successfullPayment();
     }
@@ -64,8 +64,7 @@ public class PaymentPageTest {
     void shouldNotPayWithDeclinedCard() {
         val cardInfo = new DataHelper.CardInfo(getDeclinedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.declinedPayment();
     }
@@ -77,8 +76,7 @@ public class PaymentPageTest {
     void shouldNotPayByShortCard() {
         val cardInfo = new DataHelper.CardInfo(getShortCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cardNumberErrorVisible();
     }
@@ -88,8 +86,7 @@ public class PaymentPageTest {
     void shouldNotPayByUnknownCard() {
         val cardInfo = new DataHelper.CardInfo(getUnknownCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.declinedPayment();
     }
@@ -99,8 +96,7 @@ public class PaymentPageTest {
     void shouldNotPayByCardWithSigns() {
         val cardInfo = new DataHelper.CardInfo(getCardNumberWithSigns(), getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cardNumberErrorVisible();
     }
@@ -110,8 +106,7 @@ public class PaymentPageTest {
     void shouldNotPayByCardWithLetters() {
         val cardInfo = new DataHelper.CardInfo(getCardNumberWithLetters(), getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cardNumberErrorVisible();
     }
@@ -121,8 +116,7 @@ public class PaymentPageTest {
     void shouldNotPayWithoutCard() {
         val cardInfo = new DataHelper.CardInfo(null, getValidMonth(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cardNumberErrorVisible();
     }
@@ -132,8 +126,7 @@ public class PaymentPageTest {
     void shouldNotPayWithMonthOver12() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getMonthOver12(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.monthErrorVisible();
     }
@@ -143,8 +136,7 @@ public class PaymentPageTest {
     void shouldNotPayWithMonthWithLetters() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getMonthWithLetters(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.monthErrorVisible();
     }
@@ -154,8 +146,7 @@ public class PaymentPageTest {
     void shouldNotPayWithMonthWithSigns() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getMonthWithSigns(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.monthErrorVisible();
     }
@@ -165,8 +156,7 @@ public class PaymentPageTest {
     void shouldNotPayWithMonthWithOneDigit() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getMonthWithOneDigit(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.monthErrorVisible();
     }
@@ -176,8 +166,7 @@ public class PaymentPageTest {
     void shouldNotPayWithMonthWithNulls() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getMonthWithNulls(), getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.monthErrorVisible();
     }
@@ -187,8 +176,7 @@ public class PaymentPageTest {
     void shouldNotPayWithoutMonth() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), null, getValidYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.monthErrorVisible();
     }
@@ -198,8 +186,7 @@ public class PaymentPageTest {
     void shouldNotPayWithPastYear() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getPastYear(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.expiredCardErrorVisible();
     }
@@ -209,8 +196,7 @@ public class PaymentPageTest {
     void shouldNotPayWithYearWithLetters() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getYearWithLetters(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.yearErrorVisible();
     }
@@ -220,8 +206,7 @@ public class PaymentPageTest {
     void shouldNotPayWithYearWithSigns() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getYearWithSigns(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.yearErrorVisible();
     }
@@ -231,8 +216,7 @@ public class PaymentPageTest {
     void shouldNotPayWithYearWithOneDigit() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getYearWithOneDigit(), getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.yearErrorVisible();
     }
@@ -242,8 +226,7 @@ public class PaymentPageTest {
     void shouldNotPayWithoutYear() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), null, getOwnerName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.yearErrorVisible();
     }
@@ -253,8 +236,7 @@ public class PaymentPageTest {
     void shouldNotPayWithFirstName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerFirstName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -264,8 +246,7 @@ public class PaymentPageTest {
     void shouldNotPayWithNameInRussian() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameInRussia(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -275,8 +256,7 @@ public class PaymentPageTest {
     void shouldNotPayWithNameWithDigits() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameWithDigits(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -286,8 +266,7 @@ public class PaymentPageTest {
     void shouldNotPayWithNameWithSigns() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameWithSigns(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -297,8 +276,7 @@ public class PaymentPageTest {
     void shouldNotPayWithShortName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameShort(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -308,8 +286,7 @@ public class PaymentPageTest {
     void shouldNotPayWithLongName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameLong(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -319,8 +296,7 @@ public class PaymentPageTest {
     void shouldPayWithDoubleName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerNameWithDoubleName(), getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.successfullPayment();
     }
@@ -330,8 +306,7 @@ public class PaymentPageTest {
     void shouldNotPayWithoutName() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), null, getCVC());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.ownerErrorVisible();
     }
@@ -341,8 +316,7 @@ public class PaymentPageTest {
     void shouldNotPayWithCVCwithLetters() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVCwithLetters());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cvcErrorVisible();
     }
@@ -352,8 +326,7 @@ public class PaymentPageTest {
     void shouldNotPayWithCVCwithSigns() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVCwithSigns());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cvcErrorVisible();
     }
@@ -363,8 +336,7 @@ public class PaymentPageTest {
     void shouldNotPayWithCVCwithOneDigit() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), getCVCshort());
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cvcErrorVisible();
     }
@@ -374,8 +346,7 @@ public class PaymentPageTest {
     void shouldNotPayWithoutCVC() {
         val cardInfo = new DataHelper.CardInfo(getApprovedCardNumber(), getValidMonth(), getValidYear(), getOwnerName(), null);
         val mainPage = new MainPage();
-        mainPage.payByCard();
-        val paymentPage = new PaymentPage();
+        val paymentPage = mainPage.payByCard();
         paymentPage.fillForm(cardInfo);
         paymentPage.cvcErrorVisible();
     }
