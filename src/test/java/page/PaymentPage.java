@@ -68,7 +68,7 @@ public class PaymentPage {
     }
 
     public void successfullPayment() {
-        $(".notification_status_ok").shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $(".notification_status_ok").shouldBe(Condition.visible, Duration.ofSeconds(30));
     }
 
     public void declinedPayment() {

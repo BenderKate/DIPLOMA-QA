@@ -17,8 +17,9 @@ public class DBUtils {
         return System.getProperty("db.url");
     }
 
+    @SneakyThrows
     public static void cleanTable() {
-        val deletePaymentEntity = "DELETE FROM payment_entity";
+        val deletePaymentEntity = "DELETE FROM payment_entity ";
         val runner = new QueryRunner();
         try (val conn = DriverManager.getConnection(url, user, password)) {
             runner.update(conn, deletePaymentEntity);
